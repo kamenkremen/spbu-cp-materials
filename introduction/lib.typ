@@ -106,7 +106,7 @@
         grid(
           columns: 3,
           inset: -1pt, 
-          align: (left + top, center + top, top),
+          align: (left + horizon, center + top, top),
           box(
             fill: rgb(theme.primary),
             width: 100%,
@@ -181,8 +181,17 @@
       show outline.entry.where(level: 1): set text(size: 1.6em)
       show outline.entry.where(level: 2): set text(size: 1.2em)
 
+      show outline.entry: it => {
+        // Check if the heading's body is empty
+        if it.element.body == [] {
+          none  // Skip this entry
+        } else {
+          it    // Show this entry normally
+        }
+      }
+
       set align(center)
-      text(size: 2.2em)[*Table of contents*]
+      text(size: 2.2em)[*Оглавление*]
       columns(2, outline(title: none))
     }
 
