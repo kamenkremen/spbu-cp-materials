@@ -2,19 +2,28 @@
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.2"
 
+
 #show: setup_presentation.with(
-  height: 12cm,
-  authors_short: ("Плотников", "Закарлюка"),
-  authors_long: ("Плотников Даниил Михайлович", "Закарлюка Иван Владимирович"),
-  title_long: "Вводная лекция",
-  title_short: "Вводная лекция",
-  institute_long: "Санкт-Петербургский государственный университет",
-  institute_short: "СПБГУ",
-  date: "Октябрь 2025",
+  title-slide: (
+    enable: true,
+    title: "Вводная лекция",
+    authors: ("Плотников Даниил Михайлович", "Закарлюка Иван Владимирович"),
+    institute: "Санкт-Петербургский государственный университет",
+  ),
+  footer: (
+    enable: true,
+    title: "Title",
+    institute: "СПбГУ",
+    authors: ("Плотников", "Закарлюка"),
+  ),
+  table-of-content: true,
+  header: true,
+  locale: "RU"
 )
 
+
 #align(center, text(size: 20pt, [*Организационные вопросы*]))
-#align(left, text(size: 20pt, [- Лекция во вторник пятой парой
+#align(left, text(size: 19pt, [- Лекция во вторник пятой парой
 - Контест в субботу 17:30 --- 20:00
 - Посещение свободное, в контесте можно участвовать из дома, но круче приходить на факультет 
 - Язык программирования --- в целом любой, однако традиционно C++(и на то есть причины!)
