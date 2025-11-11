@@ -214,7 +214,8 @@ long long lcmll(long long a,long long b){
 ```]
 == Расширенный Евклид и обратный по модулю
 #pad(left: 1em)[- Находит x,y: ax+by=g, где g=gcd(a,b).
-- Если gcd(a,m)=1 $->$ обратный элемент $a^(-1)≡x (mod m).$]
+- Если gcd(a,m)=1 $->$ обратный элемент $a^(-1)≡x (mod m).$
+- Чтобы почувствовать: https://vmath.ru/vf5/numtheory#linejnoe_predstavlenie_nod]
 #pad(left: 2em)[```cpp
 long long egcd(long long a,long long b,long long& x,long long& y){
     if(b==0){ x=1; y=0; return a; }
