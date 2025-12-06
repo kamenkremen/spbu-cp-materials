@@ -1,8 +1,8 @@
-#import "@local/pepentation:0.0.1": *
+#import "@preview/pepentation:0.1.0": *
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.2"
 
-#show: setup_presentation.with(
+#show: setup-presentation.with(
   title-slide: (
     enable: true,
     title: "Стандратная библиотека шаблонов C++",
@@ -15,51 +15,9 @@
     institute: "СПбГУ",
     authors: ("Плотников",),
   ),
-  table-of-content: true, // Table of contents is interactive btw. You can click to move to a selected slide
-  header: false,
+  table-of-contents: true, // Table of contents is interactive btw. You can click to move to a selected slide
   locale: "RU"
 )
-
-#show raw.where(block: false): box.with(
-  fill: luma(240),
-  inset: (x: 3pt, y: 0pt),
-  outset: (y: 3pt),
-  radius: 5pt,
-)
-
-#let warning(content) = {
-  show raw.where(block: false): it => box(
-    fill: luma(240).rgb().mix(red),
-    inset: (x: 3pt, y: 0pt),
-    outset: (y: 3pt),
-    radius: 5pt,
-    it.text
-  )
-
-  box(
-    fill: red.transparentize(80%),
-    radius: 1em,
-    outset: 0.5em,
-    text()[#content]
-  )
-}
-
-#let remark(content) = {
-  show raw.where(block: false): it => box(
-    fill: luma(240).rgb().mix(orange.lighten(20%)),
-    inset: (x: 3pt, y: 0pt),
-    outset: (y: 3pt),
-    radius: 5pt,
-    it.text
-  )
-
-  box(
-    fill: orange.transparentize(80%),
-    radius: 1em,
-    outset: 0.5em,
-    text()[#content]
-  )
-}
 
 == Организационные моменты
 #show link: set text(fill: blue)
@@ -82,6 +40,7 @@
 
 = Работа с данными
 == Статические массивы
+#v(-0.5em)
 - Для масива фиксированной длины можно использовать стандартную структуру ```cpp int a[n]```, где `n` - переменная, объявленная при помощи ключевого слова ```cpp const```, либо литерал. \
  #remark[Некоторые компиляторы позволяют так создать массив с не известной на этапе компиляции длиной, но это поведение не является стандартом языка.]
 - Так же можно создать массив в стиле ооп при помощи структуры ```cpp std::array<int, n> a(value)```, где value - значение которым надо заполнить массив изначально.
@@ -115,11 +74,9 @@
 ```cpp
 int target; //искомый элемент
 //...
-for(int* i = a; i < a+n; ++i) {
-  if(*i == target){
+for(int* i = a; i < a+n; ++i) 
+  if(*i == target)
     return i;
-  }
-}
 ```
 
 ==
@@ -131,11 +88,9 @@ for(int* i = a; i < a+n; ++i) {
 - Мы можем узнать какой итератор соответствует концу структуры при помощи функции ```cpp a.end()```.
 Тогда наша функция будет выглядеть как:
 ```cpp
-for(iterator i = a.begin(); i != a.end(); i = i.next()) {
-  if(*i == target){
+for(iterator i = a.begin(); i != a.end(); i = i.next())
+  if(*i == target)
     return i;
-  }
-}
 ```
 
 ==
@@ -144,7 +99,6 @@ for(iterator i = a.begin(); i != a.end(); i = i.next()) {
 ```cpp
 for (std::vector<int>::iterator it = a.begin(); it != a.end(); ++it)
 ```
-Или же для статического массива:
 ```cpp
 for (std::array<int, 5>::iterator it = a.begin(); it != a.end(); ++it)
 ```
@@ -152,7 +106,9 @@ for (std::array<int, 5>::iterator it = a.begin(); it != a.end(); ++it)
 ```cpp
 for (int i : a)
 ```
-#remark[Тогда в переменной `i` у нас будет *копия* элемента. Если хотим изменять, то пишем ```cpp int& i```.]
+#remark[
+
+  Тогда в переменной `i` у нас будет *копия* элемента. Если хотим изменять, то пишем ```cpp int& i```.]
 
 Иногда описание типа тоже является громоздким, тогда пишем:
 ```cpp
@@ -239,7 +195,6 @@ public:
     __CompilerGeneratedClosureType(int value, int& ref_to_value)
         : m_captured_value(value), m_captured_ref(ref_to_value) {
     }
-
     int operator()(int offset) const {
         m_captured_ref = 100;
         return m_captured_value + offset;
@@ -272,7 +227,6 @@ sort(a.rbegin(), a.rend())
 Так наша функция будет думать что массив изначально развёрнут и она ставит наименьший элемент на позицию `0`, однака фактически происходит наоборот.]
 
 == `std::pair` и `std::tuple`
-#v(-1em)
 Множество алгоритмов требуют групировку данных для своей работы. Например, метод сканирующей прямой. Тогда можно написать свою структуру:
 ```cpp
 struct event{
@@ -441,13 +395,13 @@ oh :(
 )
 ]
 Помимо разницы в асимтотиках, `std::set` так же выполняет одну дополнительную функцию -- данные в нём упорядочены, в то время как для `std::unordered_set` расположение данных непредсказуемо.
-
+#v(-1em)
 #warning[Использование `std::unordered::set` может привести к неожиданному превышению времени выполнения из-за особенностей хэшей. Во избежании этого стоит пользоваться своим хэшем. Подробнее можно почитать в #link("https://codeforces.com/blog/entry/62393?locale=ru")[блоге на codeforces].]
 
 == 
 #v(-1em)
 Как `std::set`, так и `std::multiset` при добавлении повторного элемента теряют его. Если это не поведение которые требуется в задаче, то следует использовать `std::multiset` и `std::unordered_multiset`.
-
+#v(-0.5em)
 #grid(
   columns: 2,
   align: (left, right),
@@ -1103,6 +1057,7 @@ std::set<int, std::less<int>> s;
 )
 
 = Прочее
+==
 #v(-1em)
 Если требуется создать свою кучу, то можно это можно сделать на основе `std::vector` при помощи ряда функций из ```cpp <algorithm>```, о которых я умолчал ранее:
 - ```cpp make_heap(begin, end)``` -- создать кучу на отрезке $["begin", "end")$

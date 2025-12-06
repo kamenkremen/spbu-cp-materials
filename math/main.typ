@@ -1,6 +1,6 @@
-#import "@local/pepentation:0.1.0": *
+#import "@preview/pepentation:0.1.0": *
 
-#show: setup_presentation.with(
+#show: setup-presentation.with(
   title-slide: (
     enable: true,
     title: "Математика",
@@ -463,4 +463,3 @@ $a dot x + m dot y = 1 <=> a dot x equiv 1 | :a <=> x equiv a^(-1) (mod m)$.
 - Если обратное существует, то оно найдется даже если модуль не простой.
 - Алгоритм проще выполнять руками.
 - Алгоритм чуть быстрее, если его соптимизировать.
-

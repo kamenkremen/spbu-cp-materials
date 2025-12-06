@@ -1,8 +1,8 @@
-#import "@local/pepentation:0.0.1": *
+#import "@preview/pepentation:0.1.0": *
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.2"
 
-#show: setup_presentation.with(
+#show: setup-presentation.with(
   title-slide: (
     enable: true,
     title: "Вводная лекция",
@@ -15,7 +15,7 @@
     institute: "СПбГУ",
     authors: ("Плотников", "Закарлюка"),
   ),
-  table-of-content: true,
+  table-of-contents: true,
   header: true,
   locale: "RU"
 )
@@ -107,7 +107,7 @@
  - SortMe (https://sort-me.org/).
 ])
 
-= Теория
+= ~~~~Теория~~~~
 == Анализ сложности
 #text(size: 14pt)[
 - Для анализа алгоритмов нужно научиться их сравнивать
@@ -412,4 +412,3 @@ for j = 0 to k + 1
 Дан массив целых чисел $a$, и приходят запросы вида «найти xor чисел на отрезке с позиции $l$ до позиции $r$».
 
 ]
-

@@ -1,8 +1,8 @@
-#import "@local/pepentation:0.1.0": *
+#import "@preview/pepentation:0.1.0": *
 #import "ball.typ": *
 
 
-#show: setup_presentation.with(
+#show: setup-presentation.with(
   title-slide: (
     enable: true,
     title: "Динамическое программирование",
